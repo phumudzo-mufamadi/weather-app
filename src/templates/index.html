@@ -2,30 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Weather App</title>
 </head>
 <body>
-    <h1>Welcome to Weather App</h1>
-    <input type="text" id="city" placeholder="Enter city name...">
-    <button onclick="getWeather()">Get Weather</button>
-    <div id="weather"></div>
+    <div class="main-container">
+        <h1>Weather App</h1>
+        <div class="weather-card">
+            <div class="search">
+                <input type="text" id="city" placeholder="Enter city name...">
+                <button onclick="getWeather()">Get Weather</button>
+            </div>
+            <div id="weather"></div>
+        </div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        function getWeather() {
-            const city = document.getElementById("city").value;
-            const weatherDiv = document.getElementById("weather")
-            $.ajax({
-                url: `/weather?city=${city}`,
-                method: "GET",
-                success: function (data) {
-                    $(weatherDiv).html(data);
-        },
-    });
-        }
-    </script>
-
-
-
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

@@ -23,4 +23,13 @@ def weather():
     city_weather_res = requests.get(city_weather_url, params={"lat": city_data["lat"], "lon": city_data["lon"], "units": "metric", "appid": os.environ.get("WEATHER_API_KEY")})
     city_weather_data = city_weather_res.json()
     temp = city_weather_data["main"]["temp"]
-    return render_template("weather_results.html", temp=temp, city=city)
+    description = city_weather_data["weather"][0]["description"]
+    icon = city_weather_data["weather"][0]["icon"]
+    return render_template(
+        "weather_results.html",
+        temp=temp,
+        city=city,
+        description=description,
+        icon=icon,
+    )
+
