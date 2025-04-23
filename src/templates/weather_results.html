@@ -1,6 +1,6 @@
 <div class="city">{{ city }}</div>
 <div class="date">Tuesday, April 16</div>
-<img class="weather-icon" src="https://openweathermap.org/img/wn/{{ icon }}@2x.png" alt="Weather Icon">
+<img class="weather-icon" src="{{ url_for('static', filename='{{ icon }}') }}">
 <div class="temperature">{{ temp }}°C</div>
 <div class="description">{{ description }}</div>
 <div class="details">

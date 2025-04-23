@@ -24,7 +24,8 @@ def weather():
     city_weather_data = city_weather_res.json()
     temp = city_weather_data["main"]["temp"]
     description = city_weather_data["weather"][0]["description"]
-    icon = city_weather_data["weather"][0]["icon"]
+    icon_name = city_weather_data["weather"][0]["icon"]
+    icon = f"icons/{icon_name}_t@4x.png"
     return render_template(
         "weather_results.html",
         temp=temp,
