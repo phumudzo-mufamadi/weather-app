@@ -2,7 +2,7 @@ import os
 
 import requests
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 load_dotenv()
 
@@ -25,12 +25,11 @@ def weather():
     temp = city_weather_data["main"]["temp"]
     description = city_weather_data["weather"][0]["description"]
     icon_name = city_weather_data["weather"][0]["icon"]
-    icon = f"icons/{icon_name}_t@4x.png"
-    return render_template(
-        "weather_results.html",
-        temp=temp,
-        city=city,
-        description=description,
-        icon=icon,
-    )
-
+    icon = f"static/icons/{icon_name}_t@4x.png"
+    data = {
+        "city": city.title(),
+        "temp": temp,
+        "description": description,
+        "icon": icon
+    }
+    return jsonify(data)
