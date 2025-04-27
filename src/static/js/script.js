@@ -7,13 +7,13 @@ function getWeather() {
         success: function (data) {
             console.log(data)
             $(weatherDiv).html(`<div class="city">${data.city}</div>
-                                       <div class="date">Tuesday, April 16</div>
+                                       <div class="date">${data.weather_date}</div>
                                        <img class="weather-icon" src=${data.icon}>
                                        <div class="temperature">${data.temp}°C</div>
                                        <div class="description">${data.description}</div>
                                        <div class="details">
-                                            <div>Humidity: 60%</div>
-                                            <div>Wind: 5 km/h</div>
+                                            <div>Humidity: ${data.humidity}%</div>
+                                            <div>Wind: ${data.wind_speed} km/h</div>
                                         </div>`);
 
         },

@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
@@ -19,17 +20,25 @@ def weather():
     city_query_res = requests.get(city_query_url, params={"q": city, "limit": 5, "appid": os.environ.get("WEATHER_API_KEY")})
     city_query_data = city_query_res.json()
     city_data = city_query_data[0]
+    city_name = city_data["name"]
     city_weather_url = "https://api.openweathermap.org/data/2.5/weather"
     city_weather_res = requests.get(city_weather_url, params={"lat": city_data["lat"], "lon": city_data["lon"], "units": "metric", "appid": os.environ.get("WEATHER_API_KEY")})
     city_weather_data = city_weather_res.json()
     temp = city_weather_data["main"]["temp"]
+    humidity = city_weather_data["main"]["humidity"]
+    wind_speed = city_weather_data["wind"]["speed"]
     description = city_weather_data["weather"][0]["description"]
     icon_name = city_weather_data["weather"][0]["icon"]
     icon = f"static/icons/{icon_name}_t@4x.png"
+    dt = datetime.fromtimestamp(city_weather_data["dt"])
+    weather_date = dt.strftime("%A, %B %d, %Y, %I:%M %p")
     data = {
-        "city": city.title(),
+        "city": city_name,
         "temp": temp,
         "description": description,
-        "icon": icon
+        "icon": icon,
+        "humidity": humidity,
+        "wind_speed": wind_speed,
+        "weather_date": weather_date,
     }
     return jsonify(data)
