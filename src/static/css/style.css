@@ -89,3 +89,7 @@ body {
 .search button:hover {
   background-color: #357ab7;
 }
+
+.error {
+  color: #ff0000;
+}
